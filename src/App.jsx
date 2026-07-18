@@ -46,7 +46,6 @@ function App() {
       <div className='App'>
         <Navbar />
         <Routes>
-          {/* Ruta Principal: Muestra la tabla */}
           <Route 
             path='/' 
             element={

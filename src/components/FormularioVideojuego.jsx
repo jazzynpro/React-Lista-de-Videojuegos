@@ -5,10 +5,8 @@ function FormularioVideojuego({ onGuardar }) {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Intentamos recuperar el videojuego si venimos desde el botón "Editar"
     const videojuegoRecuperado = location.state?.videojuego || null;
 
-    // Inicialización de estados correspondientes a los atributos de un Videojuego
     const [nombre, setNombre] = useState("");
     const [genero, setGenero] = useState("");
     const [plataforma, setPlataforma] = useState("");
@@ -17,7 +15,6 @@ function FormularioVideojuego({ onGuardar }) {
     const [disponible, setDisponible] = useState(true);
     const [progreso, setProgreso] = useState("0");
 
-    // useEffect idéntico al de clase: si hay juego recuperado llena los campos, si no los limpia
     useEffect(() => {
         if (videojuegoRecuperado) {
             setNombre(videojuegoRecuperado.Nombre);
@@ -39,10 +36,9 @@ function FormularioVideojuego({ onGuardar }) {
     }, [videojuegoRecuperado]);
 
     function manejarGuardar(e) {
-        e.preventDefault(); // Previene que la página se recargue al enviar el formulario
+        e.preventDefault(); 
 
         const juego = {
-            // Si es edición conserva el id, si es nuevo genera uno único con Date.now()
             id: videojuegoRecuperado ? videojuegoRecuperado.id : Date.now(),
             Nombre: nombre,
             Genero: genero,
@@ -54,7 +50,7 @@ function FormularioVideojuego({ onGuardar }) {
         };
 
         onGuardar(juego);
-        navigate("/"); // Redirige de vuelta a la tabla principal
+        navigate("/"); 
     }
 
     return (
@@ -70,7 +66,6 @@ function FormularioVideojuego({ onGuardar }) {
                     required 
                 />
 
-                {/* Componente SELECT y OPTION solicitado en los requerimientos */}
                 <label style={{ display: "block", marginTop: "10px" }}>Género</label>
                 <select value={genero} onChange={(e) => setGenero(e.target.value)} required>
                     <option value="">-- Selecciona un género --</option>
@@ -121,15 +116,13 @@ function FormularioVideojuego({ onGuardar }) {
                     onChange={(e) => setProgreso(e.target.value)} 
                     required 
                 />
-
-                {/* Componente CHECKBOX solicitado en los requerimientos */}
                 <label style={{ display: "block", marginTop: "15px" }}>
                     <input 
                         type="checkbox" 
                         checked={disponible} 
                         onChange={(e) => setDisponible(e.target.checked)} 
                     />
-                    ¿Está Disponible en Tienda?
+                    Está Disponible en Tienda?
                 </label>
 
                 <div style={{ marginTop: "20px" }}>
