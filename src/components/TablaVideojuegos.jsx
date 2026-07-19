@@ -20,6 +20,8 @@ function TablaVideojuegos({ videojuegos, onEliminar}) {
                         <th>Precio</th>
                         <th>Disponible</th>
                         <th>Progreso</th>
+                        <th>Sinopsis</th>
+                        <th>Calificación</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -30,10 +32,22 @@ function TablaVideojuegos({ videojuegos, onEliminar}) {
                             <td>{juego.Genero}</td>
                             <td>{juego.Plataforma}</td>
                             <td>{juego.Lanzamiento}</td>
-                            <td>{juego.Precio}</td>
-                            <td>{juego.Disponible ? "Sí" : "No"}</td>
-                            <td><progress value={juego.Progreso}max="1"></progress>
+                            <td>${Number(juego.Precio).toFixed(2)}</td>
+                            <td>
+                                <span style={{ 
+                                    padding: "2px 8px", 
+                                    borderRadius: "4px", 
+                                    background: juego.Disponible ? "#22c55e" : "#ef4444", 
+                                    color: "white" 
+                                }}>
+                                    {juego.Disponible ? "Sí" : "No"}
+                                </span>
                             </td>
+                            <td><progress value={juego.Progreso}max="1"></progress>
+                            <span style={{ marginLeft: "5px" }}>{Math.round(juego.Progreso * 100)}%</span>
+                            </td>
+                            <td>{juego.Sinopsis || "Sin reseña"}</td>
+                            <td>{juego.Calificacion ? `⭐ ${juego.Calificacion}` : "N/A"}</td>
                             <td> 
                                     <button className="btn-editar" onClick={() => manejarEditar(juego)}>  
                                     Editar 
